@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { PhotoService } from '../service/photo.service';
 
 @Component({
   selector: 'app-image-slider',
@@ -28,11 +29,17 @@ export class ImageSliderComponent {
   position!: any;
   formatOptions = ['webp', 'auto', 'avif'];
   positionOptions = ['center', 'top', 'bottom', 'left', 'right'];
+  photos: any[] = [];
 
+  constructor(private photoService: PhotoService){}
   ngOnInit() {
     // Select the first image by default
     this.selectedImageIndex = 0;
     // this.selectedImage = this.images[0];
+    // this.photoService.getRandomImages().subscribe((images:any) => {
+    //   console.log(images);
+    //   this.photos = images.hits;
+    // });
     this.generateImageUrl();
   }
 
@@ -44,7 +51,9 @@ export class ImageSliderComponent {
 
   generateImageUrl() {
     // Base URL
-    let url = 'https://efoodorder.netlify.app/.netlify/images?url=' + encodeURIComponent(this.images[this.selectedImageIndex]);
+    // const selectedImg = this.photos[this.selectedImageIndex].previewURL
+    const selectedImg = this.images[this.selectedImageIndex]
+    let url = 'https://efoodorder.netlify.app/.netlify/images?url=' + encodeURIComponent(selectedImg);
 
     // Add width parameter
     if (this.width) {

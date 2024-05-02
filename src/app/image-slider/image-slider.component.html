@@ -1,56 +1,71 @@
-<div class="container">
-    <div class="slider">
-        @for (image of images; track $index; ) {
-        <div class="image" [class.selected]="$index === selectedImageIndex">
-            <img [src]="image" alt="Slide" (click)="selectImage(image, $index)" width="100" height="100">
+<div class="container-fluid px-3">
+    <h3 class="text-center my-3">Visual Feast Netlify Dynamic Site Challenge</h3>
+    <h6 class="text-center my-3">Netlify Image CDN</h6>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="d-flex flex-wrap gap-3">
+                @for (image of images; track $index; ) {
+                <img class="shadow" [src]="image" alt="Slide" (click)="selectImage(image, $index)" width="100" height="100"
+                    [class.selected]="$index === selectedImageIndex">
+                }
+            </div>
         </div>
-        }
+        <div class="col-md-6">
+            <div class="preview shadow text-center">
+                @if (selectedImage) {
+                <img [src]="selectedImage" alt="Selected Image">
+                } @else {
+                <img [src]="images[0]" alt="Selected Image">
+                }
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group row mb-3">
+                        <label class="col-sm-5" for="width">Width:</label>
+                        <input type="number" class="form-control col" id="width" [(ngModel)]="width"
+                            (ngModelChange)="generateImageUrl()" min="1" required>
+                    </div>
+                    <div class="col form-group row mb-3">
+                        <label class="col-sm-5" for="height">Height:</label>
+                        <input type="number" class="form-control col" id="height" [(ngModel)]="height"
+                            (ngModelChange)="generateImageUrl()" min="1" required>
+                    </div>
+                    <div class="form-group row mb-3">
+                        <label class="col-sm-5" for="quality">Quality (1-100):</label>
+                        <input type="number" class="form-control col" id="quality" [(ngModel)]="quality"
+                            (ngModelChange)="generateImageUrl()" min="1" max="100">
+                    </div>
+                    <div class="col form-group row mb-3">
+                        <label class="col-sm-5" for="fit">Fit:</label>
+                        <select class="form-select col" id="fit" [(ngModel)]="fit" (ngModelChange)="generateImageUrl()"
+                            required>
+                            @for (fit of fitOptions; track $index) {
+                            <option [value]="fit">{{ fit }}</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group row mb-3">
+                        <label class="col-sm-5" for="format">Format:</label>
+                        <select class="form-select col" id="format" [(ngModel)]="format"
+                            (ngModelChange)="generateImageUrl()" required>
+                            @for (format of formatOptions; track $index) {
+                            <option [value]="format">{{ format }}</option>
+                            }
+                        </select>
+                    </div>
+                    <div class=" form-group row mb-3">
+                        <label class="col-sm-5" for="position">Position:</label>
+                        <select class="form-select col" id="position" [(ngModel)]="position"
+                            (ngModelChange)="generateImageUrl()" required>
+                            @for (position of positionOptions; track $index) {
+                            <option [value]="position">{{ position }}</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <label for="width">Width:</label>
-    <input type="number" id="width" [(ngModel)]="width" (ngModelChange)="generateImageUrl()" min="1" required>
-    <div class="setting">
-        <label for="height">Height:</label>
-        <input type="number" id="height" [(ngModel)]="height" (ngModelChange)="generateImageUrl()" min="1" required>
-    </div>
-    <div class="setting">
-        <label for="quality">Quality (1-100):</label>
-        <input type="number" id="quality" [(ngModel)]="quality" (ngModelChange)="generateImageUrl()" min="1" max="100">
-    </div>
-    <div class="setting">
-        <label for="fit">Fit:</label>
-        <select id="fit" [(ngModel)]="fit" (ngModelChange)="generateImageUrl()" required>
-            @for (fit of fitOptions; track $index) {
-            <option [value]="fit">
-                {{ fit }}
-            </option>
-            }
-        </select>
-    </div>
-    <div class="setting">
-        <label for="format">Format:</label>
-        <select id="format" [(ngModel)]="format" (ngModelChange)="generateImageUrl()" required>
-            @for (format of formatOptions; track $index) {
-            <option [value]="format">
-                {{ format }}
-            </option>
-            }
-        </select>
-    </div>
-    <div class="setting">
-        <label for="position">Position:</label>
-        <select id="position" [(ngModel)]="position" (ngModelChange)="generateImageUrl()" required>
-            @for (position of positionOptions; track $index) {
-            <option [value]="position">
-                {{ position }}
-            </option>
-            }
-        </select>
-    </div>
-</div>
-<div class="preview">
-    @if (selectedImage) {
-    <img [src]="selectedImage" alt="Selected Image">
-    } @else {
-    <img [src]="images[0]" alt="Selected Image">
-    }
 </div>

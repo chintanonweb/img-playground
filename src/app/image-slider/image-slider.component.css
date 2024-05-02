@@ -1,27 +1,7 @@
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  height: 100%;
-}
-
-.slider {
-  display: flex;
-  width: 600px;
-  margin: 0 100px;
-  overflow: auto;
-}
-
-.image {
-  cursor: pointer;
-  margin-right: 10px;
-}
-
 .preview {
-  display: block;
-  margin-top: 20px;
-  text-align: center;
+  outline: 1px black solid;
+  height: 600px;
+  overflow: auto;
 }
 
 .selected {
