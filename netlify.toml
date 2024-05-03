@@ -1,0 +1,10 @@
+[images]
+  remote_images = ["https://efoodorder.netlify.app/assets/.*"]
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
+
+[functions]
+  directory = "functions/"

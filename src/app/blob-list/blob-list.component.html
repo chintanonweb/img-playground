@@ -1,0 +1,16 @@
+<h2>Blob List</h2>
+@if (blobs.length > 0) {
+<ul>
+    @for (blob of blobs; track $index) {
+    <li>
+        {{ blob.filename }} ({{ blob.size }} bytes) - {{ blob.metadata.type }}
+    </li>
+    }
+</ul>
+}
+@if (blobs.length === 0) {
+<p>No blobs uploaded yet.</p>
+}
+
+<button class="btn btn-danger mt-3 me-2" routerLink="/blob-upload">Blob upload</button>
+<button class="btn btn-danger mt-3" routerLink="/">Home</button>
