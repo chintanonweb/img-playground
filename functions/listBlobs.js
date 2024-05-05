@@ -12,6 +12,13 @@ exports.handler = async (event, context) => {
     console.log(await store.get("img-playground"));
     // const store = getStore("your-blob-store-name"); // Replace with your store name
     const blobs = await store.list();
+    const value = await store.get("img-playground")
+
+    if (value === null) {
+      console.log('empty');
+    } else {
+      console.log(value);
+    }
 
     return {
       statusCode: 200,

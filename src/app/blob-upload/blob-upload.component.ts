@@ -22,15 +22,17 @@ export class BlobUploadComponent {
   }
 
   uploadBlob(file: File, metadata: any) {
-    const formData = new FormData();
+    let formData = new FormData();
     formData.append('file', file);
     formData.append('metadata', JSON.stringify(metadata));
 
     this.http.post(this.uploadBlobUrl, formData)
-      .subscribe(response => {
-        console.log('Blob uploaded successfully!');
-      }, error => {
-        console.error('Error uploading blob:', error);
+      .subscribe({
+        next: (response) => {
+          console.log('Blob uploaded successfully!');
+        }, error: (error) => {
+          console.error('Error uploading blob:', error);
+        }
       });
   }
 }
