@@ -38,7 +38,7 @@ export class ImageSliderComponent {
     // Select the first image by default
     this.selectedImageIndex = 0;
     // this.selectedImage = this.images[0];
-    // this.photoService.getRandomImages().subscribe((images:any) => {
+    // this.photoService.getRandomImages().subscribe((images: any) => {
     //   console.log(images);
     //   this.images = images;
     // });
@@ -53,7 +53,7 @@ export class ImageSliderComponent {
 
   generateImageUrl() {
     // Base URL
-    // const selectedImg = this.photos[this.selectedImageIndex].previewURL
+    // const selectedImg = this.images[this.selectedImageIndex].urls.small
     const selectedImg = this.images[this.selectedImageIndex]
     let url = 'https://efoodorder.netlify.app/.netlify/images?url=' + encodeURIComponent(selectedImg);
     let previewUrl = '/.netlify/images?url=' + selectedImg;

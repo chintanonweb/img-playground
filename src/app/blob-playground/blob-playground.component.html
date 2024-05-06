@@ -1,0 +1,49 @@
+<div class="container">
+    <h2 class="text-center">Blob Play Ground</h2>
+    <div class="row mb-3">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <h6 class="text-center text-secondary">Upload Blob</h6>
+            <form class="form-example" (ngSubmit)="onSubmit()">
+                <div class="row g-3 align-items-center justify-content-center">
+                    <div class="col-auto">
+                        <label for="name" class="col-form-label">Name</label>
+                    </div>
+                    <div class="col-auto">
+                        <input id="name" class="form-control" type="text" name="name" [(ngModel)]="name">
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-secondary" type="submit">Add Blob</button>
+                    </div>
+                </div>
+            </form>
+            <input type="file" class="form-control" (change)="onFileSelected($event)">
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div class="card shadow">
+                <h6 class="text-center text-secondary mt-1">Blob list</h6>
+                <div class="card-body">
+                    @if (blobs.length > 0) {
+                    <ul>
+                        @for (blob of blobs; track $index) {
+                        <li>
+                            {{ blob.key }}
+                        </li>
+                        }
+                    </ul>
+                    }
+                    @if (blobs.length === 0) {
+                    <p>No blobs uploaded yet.</p>
+                    }
+                </div>
+            </div>
+
+            <button class="btn btn-danger mt-3" routerLink="/">Image Playground</button>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>

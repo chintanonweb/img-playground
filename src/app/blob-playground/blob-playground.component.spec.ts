@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BlobListComponent } from './blob-list.component';
+import { BlobPlaygroundComponent } from './blob-playground.component';
 
-describe('BlobListComponent', () => {
-  let component: BlobListComponent;
-  let fixture: ComponentFixture<BlobListComponent>;
+describe('BlobPlaygroundComponent', () => {
+  let component: BlobPlaygroundComponent;
+  let fixture: ComponentFixture<BlobPlaygroundComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BlobListComponent]
+      imports: [BlobPlaygroundComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(BlobListComponent);
+    fixture = TestBed.createComponent(BlobPlaygroundComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
