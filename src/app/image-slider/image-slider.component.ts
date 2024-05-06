@@ -37,11 +37,11 @@ export class ImageSliderComponent {
   ngOnInit() {
     // Select the first image by default
     this.selectedImageIndex = 0;
-    // this.selectedImage = this.images[0];
-    // this.photoService.getRandomImages().subscribe((images: any) => {
-    //   console.log(images);
-    //   this.images = images;
-    // });
+    this.selectedImage = this.images[0];
+    this.photoService.getRandomImages().subscribe((images: any) => {
+      console.log(images);
+      this.images = images;
+    });
     this.generateImageUrl();
   }
 
@@ -53,9 +53,10 @@ export class ImageSliderComponent {
 
   generateImageUrl() {
     // Base URL
-    // const selectedImg = this.images[this.selectedImageIndex].urls.small
-    const selectedImg = this.images[this.selectedImageIndex]
-    let url = 'https://efoodorder.netlify.app/.netlify/images?url=' + encodeURIComponent(selectedImg);
+    const selectedImg = this.images[this.selectedImageIndex].urls.small
+    // const selectedImg = this.images[this.selectedImageIndex]
+    // let url = 'https://efoodorder.netlify.app/.netlify/images?url=' + encodeURIComponent(selectedImg);
+    let url = '/.netlify/images?url=' + selectedImg;
     let previewUrl = '/.netlify/images?url=' + selectedImg;
 
     // Add width parameter

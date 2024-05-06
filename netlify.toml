@@ -1,5 +1,5 @@
 [images]
-  remote_images = ["https://efoodorder.netlify.app/assets/.*"]
+  remote_images = ["https://images.unsplash.com/.*" ]
 
 [[redirects]]
   from = "/*"
