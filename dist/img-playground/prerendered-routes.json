@@ -1,7 +1,6 @@
 {
   "routes": [
     "/",
-    "/blob-list",
-    "/blob-upload"
+    "/blob-playground"
   ]
 }

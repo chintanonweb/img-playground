@@ -36,12 +36,14 @@ export class ImageSliderComponent {
   constructor(private photoService: PhotoService) { }
   ngOnInit() {
     // Select the first image by default
+    this.selectedImage = this.images[0];
+    this.generateImageUrl();
     // this.photoService.getRandomImages().subscribe((images: any) => {
     //   // console.log(images);
     //   this.images = images;
+    //   this.selectedImage = this.images[0];
+    //   this.generateImageUrl();
     // });
-    // this.selectedImage = this.images[0];
-    this.generateImageUrl();
   }
 
   selectImage(image: string, index: number) {
@@ -51,9 +53,9 @@ export class ImageSliderComponent {
   }
 
   generateImageUrl() {
-    // Base URL
+
     // const selectedImg = this.images[this.selectedImageIndex].urls.small
-    // let url = 'https://efoodorder.netlify.app/.netlify/images?url=' + selectedImg;
+    // let url = 'https://img-playground.netlify.app/.netlify/images?url=' + selectedImg;
     const selectedImg = this.images[this.selectedImageIndex]
     let url = 'https://efoodorder.netlify.app/.netlify/images?url=' + encodeURIComponent(selectedImg);
     let previewUrl = '/.netlify/images?url=' + selectedImg;

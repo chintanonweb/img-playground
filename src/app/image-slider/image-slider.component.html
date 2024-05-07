@@ -9,8 +9,8 @@
                 @for (image of images; track $index; ) {
                 <img class="shadow" [src]="image" alt="Slide" (click)="selectImage(image, $index)" width="100"
                     height="100" [class.selected]="$index === selectedImageIndex">
-                <!-- <img class="shadow" [src]="image" alt="Slide" (click)="selectImage(image, $index)" width="100"
-                    height="100" [class.selected]="$index === selectedImageIndex"> -->
+                <!-- <img class="shadow" [src]="image.urls.small" alt="Slide" (click)="selectImage(image.urls.small, $index)"
+                    width="100" height="100" [class.selected]="$index === selectedImageIndex"> -->
                 }
             </div>
         </div>
@@ -19,7 +19,7 @@
                 @if (selectedImage) {
                 <img [src]="selectedImage" alt="Selected Image">
                 } @else {
-                <img [src]="images[0]" alt="Selected Image">
+                img not selected
                 }
             </div>
         </div>
