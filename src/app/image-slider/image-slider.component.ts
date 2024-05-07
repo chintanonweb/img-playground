@@ -24,26 +24,26 @@ export class ImageSliderComponent {
   selectedImageIndex: number = 0;
   width: number = 800;
   height: number = 600;
-  quality: number | null = null; // Allow optional quality input
+  quality: number | null = 10; // Allow optional quality input
   fitOptions = ['cover', 'contain', 'fill'];
   fit!: any;
   format!: any;
   position!: any;
-  formatOptions = ['webp', 'auto', 'avif'];
+  formatOptions = ['webp', 'jpg', 'png', 'auto', 'avif'];
   positionOptions = ['center', 'top', 'bottom', 'left', 'right'];
   photos: any[] = [];
 
   constructor(private photoService: PhotoService) { }
   ngOnInit() {
     // Select the first image by default
-    this.selectedImage = this.images[0];
-    this.generateImageUrl();
-    // this.photoService.getRandomImages().subscribe((images: any) => {
-    //   // console.log(images);
-    //   this.images = images;
-    //   this.selectedImage = this.images[0];
-    //   this.generateImageUrl();
-    // });
+    // this.selectedImage = this.images[0];
+    // this.generateImageUrl();
+    this.photoService.getRandomImages().subscribe((images: any) => {
+      // console.log(images);
+      this.images = images;
+      this.selectedImage = this.images[0];
+      this.generateImageUrl();
+    });
   }
 
   selectImage(image: string, index: number) {
@@ -52,12 +52,17 @@ export class ImageSliderComponent {
     this.generateImageUrl();
   }
 
+  galleryImageUrl(img: string): string {
+    let url = 'https://img-playground.netlify.app/.netlify/images?url=' + img + '&w=100&h=100&q=10';
+    return url;
+  }
+
   generateImageUrl() {
 
-    // const selectedImg = this.images[this.selectedImageIndex].urls.small
-    // let url = 'https://img-playground.netlify.app/.netlify/images?url=' + selectedImg;
-    const selectedImg = this.images[this.selectedImageIndex]
-    let url = 'https://efoodorder.netlify.app/.netlify/images?url=' + encodeURIComponent(selectedImg);
+    const selectedImg = this.images[this.selectedImageIndex].urls.raw
+    let url = 'https://img-playground.netlify.app/.netlify/images?url=' + selectedImg;
+    // const selectedImg = this.images[this.selectedImageIndex]
+    // let url = 'https://efoodorder.netlify.app/.netlify/images?url=' + encodeURIComponent(selectedImg);
     let previewUrl = '/.netlify/images?url=' + selectedImg;
 
     // Add width parameter
