@@ -1,0 +1,49 @@
+<div class="container-fluid px-3 py-3">
+    <h2 class="text-center">News Play Ground</h2>
+    <p>with Stale While Revalidate: "netlify-cdn-cache-control":
+        "public, max-age=0, stale-while-revalidate=86400",</p>
+    @if (loading) {
+    <div class="text-center">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    }
+    @if(!loading) {
+    @if (articles.length > 0) {
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @for (article of articles; track $index) {
+        <div class="col">
+            <div class="card">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        @if (article.urlToImage) {
+                        <img [src]="article.urlToImage" class="img-fluid h-100" [alt]="article.title">
+                        }
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ article.title }}</h5>
+                            <!-- <p class="card-text">{{ article.description }}</p> -->
+                            <a [href]="article.url" class="btn btn-danger">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+    }
+    @if (articles.length === 0) {
+    <p>No news available</p>
+    }
+    }
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <button class="btn btn-danger mt-3" routerLink="/">Image Playground</button>
+            <button class="btn btn-danger mt-3 me-2" routerLink="/news-playground">News Playground</button>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
