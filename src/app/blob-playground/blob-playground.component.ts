@@ -1,5 +1,5 @@
 import { HttpHeaders } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
@@ -19,6 +19,10 @@ export class BlobPlaygroundComponent {
   uploadBlobUrl = '/.netlify/functions/uploadBlob';
   name: string = '';
   loading: boolean = false;
+  @ViewChild('fileInput') fileInputRef!: ElementRef;
+  errorMessage: string = '';
+  showSuccessMsg: string = '';
+  showErrorMsg: string = '';
 
   constructor(
     private blobService: BlobService
@@ -65,6 +69,19 @@ export class BlobPlaygroundComponent {
   }
 
   async onFileSelected(event: any) {
+    this.errorMessage = '';
+
+    const maxFileSize = 100 * 1024; // 100KB in bytes
+    const fileData = event.target.files[0];
+    const fileSize = fileData?.size;
+    if (fileSize > maxFileSize) {
+      this.errorMessage = "File size exceeds the limit of 100KB";
+      this.fileInputRef.nativeElement.value = ''; // Clear the file input
+      setTimeout(() => {
+        this.errorMessage = '';
+      }, 3000);
+      return; // Exit the function without proceeding further
+    }
     const readFile = (file: any) => {
       return new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -75,17 +92,15 @@ export class BlobPlaygroundComponent {
         reader.readAsDataURL(file);
       });
     };
-    const fileData = event.target.files[0];
     const file = await readFile(fileData);
     const fileName = event.target.files[0].name.split('.').shift();
     const name = fileData?.name;
     const type = fileData?.type ? fileData?.type : 'NA';
-    const size = fileData?.size;
     const lastModified = fileData?.lastModified;
     const metaData = {
       name: name,
       type: type,
-      size: this.bytesToSize(size),
+      size: this.bytesToSize(fileSize),
       lastModified: new Date(lastModified)
     }
 
@@ -98,9 +113,21 @@ export class BlobPlaygroundComponent {
     lastValueFrom(res$)
       .then((response: any) => {
         console.log(response);
+        if (response) {
+          this.showSuccessMsg = response;
+          setTimeout(() => {
+            this.showSuccessMsg = '';
+          }, 3000);
+        }
         this.getBlobsList();
       })
-      .catch((error) => console.log(error))
+      .catch((error) => {
+        console.log(error);
+        this.showErrorMsg = error;
+        setTimeout(() => {
+          this.showErrorMsg = '';
+        }, 3000);
+      })
   }
   isImageData(data: any): boolean {
     console.log(data?.data?.img?.startsWith('data:image'));
