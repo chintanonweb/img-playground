@@ -1,0 +1,65 @@
+<div class="container-fluid px-3">
+    <h3 class="text-center my-3">Social Media Image Optimizer</h3>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group mb-3">
+                <label for="format">Social Media sizes:</label>
+                <select class="form-select" [(ngModel)]="selectedPlatform" (ngModelChange)="getTransformedImageUrl()"
+                    [disabled]="!imageUrl">
+                    @for (option of platformOptions; track $index) {
+                    <option [value]="option.value">
+                        {{ option.label }}
+                    </option>
+                    }
+                </select>
+            </div>
+            <div class="form-group row mb-3">
+            <label for="quality" class="form-label col-sm-4">Quality</label>
+            <input type="range" class="form-range" min="0" max="100" id="quality" [(ngModel)]="quality"
+            (ngModelChange)="getTransformedImageUrl()" [disabled]="!imageUrl">
+            </div>
+            <div class="form-group row mb-3">
+                <label class="col-sm-4" for="format">Format:</label>
+                <select class="form-select col" id="format" [(ngModel)]="format"
+                    (ngModelChange)="getTransformedImageUrl()" [disabled]="!imageUrl">
+                    @for (format of formatOptions; track $index) {
+                    <option [value]="format">{{ format }}</option>
+                    }
+                </select>
+            </div>
+            <div class=" form-group row mb-3">
+                <label class="col-sm-4" for="position">Position:</label>
+                <select class="form-select col" id="position" [(ngModel)]="position"
+                    (ngModelChange)="getTransformedImageUrl()" [disabled]="!imageUrl">
+                    @for (position of positionOptions; track $index) {
+                    <option [value]="position">{{ position }}</option>
+                    }
+                </select>
+            </div>
+            <button class="btn btn-danger mt-3 me-2" routerLink="/">Img Playground</button>
+            <button class="btn btn-danger mt-3 me-2" routerLink="/blob-playground">Blob Playground</button>
+            <button class="btn btn-danger mt-3 me-2" routerLink="/news-playground">News Playground</button>
+        </div>
+        <div class="col-md-6 text-center">
+            <ik-upload fileName="test.jpg" (onError)="handleUploadError($event)"
+                (onSuccess)="handleUploadSuccess($event)" [authenticator]="authenticator" class="mb-3 d-block">
+            </ik-upload>
+            @if (loading) {
+            <div class="text-center">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+            }
+            @if(!loading) {
+            @if(imageUrl){
+            <button class="btn btn-danger mt-3 mb-3 d-block" (click)="downloadImages()">Download Image</button>
+
+            <img [src]="imageUrl" alt="Uploaded Image" class="img-fluid mb-3" />
+            }
+            }
+        </div>
+        <div class="col-md-3">
+        </div>
+    </div>
+</div>

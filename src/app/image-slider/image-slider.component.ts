@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { PhotoService } from '../service/photo.service';
 import { RouterModule } from '@angular/router';
-
+import { HttpClient } from '@angular/common/http';
+import { IkUploadWrapperModule } from '../ik-upload.module';
 @Component({
   selector: 'app-image-slider',
   standalone: true,
@@ -33,7 +34,9 @@ export class ImageSliderComponent {
   positionOptions = ['center', 'top', 'bottom', 'left', 'right'];
   photos: any[] = [];
 
-  constructor(private photoService: PhotoService) { }
+  constructor(private photoService: PhotoService,
+    private http: HttpClient,
+  ) { }
   ngOnInit() {
     // Select the first image by default
     // this.selectedImage = this.images[0];
@@ -105,5 +108,4 @@ export class ImageSliderComponent {
     this.selectedImage = url;
     this.previewUrl = previewUrl;
   }
-
 }
