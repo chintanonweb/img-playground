@@ -18,8 +18,13 @@ export class BlobService {
     return this.http.get(url);
   }
 
-  getNews(url: string) {
-    return this.http.get(url);
+  getNews(url: string, category?: string) {
+    let queryParams = '';
+    if (category) {
+      queryParams = `?category=${category}`;
+    }
+    return this.http.get(`${url}${queryParams}`);
+    // return this.http.get(url);
   }
 
   getHeadlines(country: string = 'in', category: string = 'technology'): Observable<any> {

@@ -170,7 +170,7 @@ export class ImgGeneratorComponent {
     if (transformation) {
       const params = new URLSearchParams(transformation);
       // this.imageUrl = `https://imageground.netlify.app/.netlify/images?url=${this.defaultImgUrl}&fit=cover&w=1024&h=1024&position=center&q=50&fm=png`;
-      this.imageUrl = `https://imageground.netlify.app/.netlify/images?url=${this.defaultImgUrl}&${params}`;
+      this.imageUrl = `https://img-playground.netlify.app/.netlify/images?url=${this.defaultImgUrl}&${params}`;
       if (this.format) {
         this.imageUrl += `&fm=${this.format}`;
       }

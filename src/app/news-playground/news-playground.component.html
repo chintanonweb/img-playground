@@ -1,15 +1,38 @@
 <div class="container-fluid px-3 py-3">
     <div class="row">
         <div class="col-md-6">
-            <h2 class="text-start">News Catch Control Play Ground</h2>
+            <h2 class="text-start">News Cache Control Play Ground</h2>
+            <div class="form-group row mb-3 align-items-center">
+                <label for="category" class="col-auto">Category</label>
+                <select class="form-select col-auto w-auto" [(ngModel)]="category" (ngModelChange)="getNews(category)">
+                    <option value="business">Business</option>
+                    <option value="technology">Technology</option>
+                    <option value="entertainment">Entertainment</option>
+                    <option value="general">General</option>
+                    <option value="health">Health</option>
+                    <option value="science">Science</option>
+                    <option value="sports">Sports</option>
+                </select>
+                <span class="col-auto">
+                    For Cache-tag select categor
+                </span>
+            </div>
         </div>
         <div class="col-md-6 text-end">
             <button class="btn btn-danger mt-3 me-2" routerLink="/">Image Playground</button>
             <button class="btn btn-danger mt-3 " routerLink="/blob-playground">Blob Playground</button>
         </div>
     </div>
-    <p>with Stale While Revalidate: "netlify-cdn-cache-control":
-        "public, max-age=0, stale-while-revalidate=86400",</p>
+    <div class="card bg-dark text-warning mb-3">
+        @if(category){
+            Cache-Tag with the request query parameter cateogry
+            <pre class="text-white">{{'Cache-Tag:' + category}}</pre>
+        }
+        @if(!category){
+            With Stale While Revalidate:
+            <pre class="text-white">"netlify-cdn-cache-control": "public, max-age=0, stale-while-revalidate=86400",</pre>
+        }
+    </div>
     @if (loading) {
     <div class="text-center">
         <div class="spinner-border text-danger" role="status">
@@ -26,13 +49,13 @@
                 <div class="row g-0">
                     <div class="col-md-4">
                         @if (article.urlToImage) {
-                        <img [src]="article.urlToImage" class="img-fluid h-100" [alt]="article.title">
+                        <img [src]="article.urlToImage" class="img-fluid h-100" height="200" width="200" [alt]="article.title">
                         }
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title">{{ article.title }}</h5>
-                            <!-- <p class="card-text">{{ article.description }}</p> -->
+                            <h5 class="card-title text-truncate line-clamp-3">{{ article.title }}</h5>
+                            <p class="card-text text-truncate">{{ article.description }}</p>
                             <a [href]="article.url" class="btn btn-danger">Read More</a>
                         </div>
                     </div>

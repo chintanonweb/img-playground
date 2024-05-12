@@ -23,15 +23,23 @@ async function fetchTopNewsStories(apiKey, country = "in", category = "") {
 exports.handler = async (event, context) => {
   try {
     const apiKey = "b75c1550c91c4a078978505f9eacaa61 ";
-    const newsStories = await fetchTopNewsStories(apiKey);
+    const category = event.queryStringParameters?.category;
+    const newsStories = await fetchTopNewsStories(apiKey, 'in', category);
+    const headers = category ? {
+      "Content-Type": "application/json",
+      "Cache-Control": "public, max-age=0, must-revalidate",
+      "Netlify-CDN-Cache-Control": "public, max-age=31536000, must-revalidate",
+      "Cache-Tag": `${category},news,proxy-api-response`,
+      "Netlify-Cache-Tag": `${category},news,proxy-api-response`
+    } : {
+      "Content-Type": "application/json",
+      "Netlify-CDN-Cache-Control": "public, max-age=0, stale-while-revalidate=86400"
+    };
+
     return {
       statusCode: 200,
       body: JSON.stringify(newsStories),
-      headers: {
-        "content-type": "application/json",
-        "netlify-cdn-cache-control":
-          "public, max-age=0, stale-while-revalidate=86400",
-      },
+      headers: headers
     };
   } catch (error) {
     console.error("Error processing request:", error);

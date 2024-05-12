@@ -28,9 +28,9 @@ export class NewsPlaygroundComponent implements OnInit {
     // this.getHeadlines();
   }
 
-  getNews() {
+  getNews(category?: string) {
     this.loading = true;
-    const res$ = this.blobService.getNews(this.getNewsUrl)
+    const res$ = this.blobService.getNews(this.getNewsUrl, category)
     lastValueFrom(res$).then((item: any) => {
       this.articles = item;
       this.loading = false; // Set loading to false after blobs are fetched
