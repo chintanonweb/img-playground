@@ -3,8 +3,8 @@ const { getStore } = require("@netlify/blobs");
 exports.handler = async (req, context) => {
   const store = getStore({
     name: "img-playground",
-    siteID: "1aed05a5-5e7c-4a21-aca3-0b5a6f9c6f38",
-    token: "nfp_p6d7HZGn4ps9CsK1eoH1ErSFDRw5vHRUc969 ",
+    siteID: "your_siteId",
+    token: "your_tokenId",
   });
   const data = JSON.parse(req.body);
   const key = data.fileName;
