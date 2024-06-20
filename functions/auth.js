@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require('uuid'); // Import uuid
 
 exports.handler = async (event, context) => {
   // Environment variables should be set in Netlify settings, not a .env file
-  const privateKey = 'private_CZWJiSL91zXBxvqoe2yUC2IH8Tc='; // Use a more descriptive name
+  const privateKey = 'your_privatekey'; // Use a more descriptive name
 
   if (!privateKey) {
     return {
