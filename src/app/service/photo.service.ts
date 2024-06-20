@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class PhotoService {
   private apiUrl = 'https://api.unsplash.com/photos';
-  private apiKey = 'oPXncVGsmIqZ6j6ue8K0O0GmSTpYfTOXMjkY1Nn4_cY';
+  private apiKey = 'your_unsplashurl';
 
   constructor(private http: HttpClient) { }
 
