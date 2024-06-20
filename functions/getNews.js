@@ -22,7 +22,7 @@ async function fetchTopNewsStories(apiKey, country = "in", category = "") {
 
 exports.handler = async (event, context) => {
   try {
-    const apiKey = "b75c1550c91c4a078978505f9eacaa61 ";
+    const apiKey = "your_apikey";
     const category = event.queryStringParameters?.category;
     const newsStories = await fetchTopNewsStories(apiKey, 'in', category);
     const headers = category ? {
