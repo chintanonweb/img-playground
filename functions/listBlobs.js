@@ -5,8 +5,8 @@ exports.handler = async (event, context) => {
     // const store = getStore("img-playground");
     const store = getStore({
       name: "img-playground",
-      siteID: "1aed05a5-5e7c-4a21-aca3-0b5a6f9c6f38",
-      token: "nfp_p6d7HZGn4ps9CsK1eoH1ErSFDRw5vHRUc969 ",
+      siteID: "your_siteid",
+      token: "token_id",
     });
     const blobs = await store.list();
     // Array to store blob data
